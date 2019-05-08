@@ -1,4 +1,5 @@
-#include 'provided_files/Technovision.py'
+import  Techniovision
+
 
 
 STUDY_PROGRAM_NAME = 0
@@ -22,9 +23,9 @@ def insertStudyProgramVote (studyProgramsList, studyProgram):
 
 
 def inside_contest(faculty, file_name):
-    file=open(file_name,'r')
-    votersIdList=[]
-    studyProgramsList=[]
+    file = open(file_name,'r')
+    votersIdList = []
+    studyProgramsList = []
     for line in file:
         listOfLine=line.split(' ')
         if listOfLine[OPERATION1]!="inside":
@@ -56,5 +57,5 @@ def inside_contest(faculty, file_name):
 
 
 
-
-
+Techniovision.TechniovisionWinningFaculty(techniovision)
+Techniovision.TechniovisionDestroy(techniovision)
