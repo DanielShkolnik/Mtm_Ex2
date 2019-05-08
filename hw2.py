@@ -60,7 +60,6 @@ def inside_contest(faculty, file_name):
 
 
 def add_vote(t,faculties,student,studentFaculty,votingProgram):
-
     for faculty in faculties:
         if faculty[1] == votingProgram:
             Techniovision.TechniovisionStudentVotes(t, int(student), str(studentFaculty), str(faculty[0]))
@@ -68,7 +67,7 @@ def add_vote(t,faculties,student,studentFaculty,votingProgram):
 
 
 
-t = Techniovision.TechniovisionCreate()
+techniovision = Techniovision.TechniovisionCreate()
 faculties = []
 file = open("input.txt")
 for line in file:
@@ -78,7 +77,7 @@ for line in file:
 file.close()
 
 for faculty in faculties:
-    faculty[1] = inside_contest(faculty[0])
+    faculty[1] = inside_contest(faculty[0], "input.txt")
 
 ids = []
 file = open("input.txt")
@@ -87,8 +86,8 @@ for line in file:
     if lineList[0] == "techniovision":
         if not (lineList[1] in ids):
             ids.append(lineList[1])
-            add_vote(t, faculties, list[1], list[3], list[4])
+            add_vote(techniovision, faculties, list[1], list[3], list[4])
 file.close()
 
-Techniovision.TechniovisionWinningFaculty(t)
-Techniovision.TechniovisionDestroy(t)
+Techniovision.TechniovisionWinningFaculty(techniovision)
+Techniovision.TechniovisionDestroy(techniovision)
