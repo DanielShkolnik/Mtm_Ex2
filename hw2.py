@@ -1,52 +1,53 @@
-import  Techniovision
+import Techniovision
 
+STAFF_STUDY_PROGRAM = 2
+STAFF_FACULTY = -1
+STUDY_PROGRAM_NAME = 0
+STUDY_PROGRAM_VOTES = 1
+OPERATION = 0
+ID = 2
+STUDY_PROGRAM = 3
+FACULTY = 4
 
-CELL_ZERO = 0
-CELL_ONE = 1
-CELL_TWO = 2
-CELL_THREE = 3
-CELL_FOUR = 4
-
-def isIn (list,studyProgram):
+def isIn (list, studyProgram):
     for listCell in list:
-        if listCell[CELL_ZERO] == studyProgram:
+        if listCell[STUDY_PROGRAM_NAME] == studyProgram:
             return True
     return False
 
-def insertStudyProgramVote (studyProgramsList, studyProgram):
+def insertStudyProgramVote (studyProgramsList, studyProgram, votes):
+    if not isIn(studyProgramsList, studyProgram):
+        studyProgramsList.append([studyProgram, votes])
+        return None
     for listCell in studyProgramsList:
-        if listCell[CELL_ZERO] == studyProgram:
-            listCell[CELL_ONE] += 1
+        if listCell[STUDY_PROGRAM_NAME] == studyProgram:
+            listCell[STUDY_PROGRAM_VOTES] += votes
 
 
 def inside_contest(faculty, file_name):
-    file = open(file_name,'r')
+    file = open(file_name, 'r')
     votersIdList = []
     studyProgramsList = []
     for line in file:
-        listOfLine = line.split(' ')
-        if listOfLine[CELL_ZERO] != "inside":
+        listOfLine=line.split(' ')
+        if listOfLine[OPERATION] == "staff" and listOfLine[STAFF_FACULTY] == faculty:
+            insertStudyProgramVote(studyProgramsList, listOfLine[STAFF_STUDY_PROGRAM], 20)
             continue
-        elif listOfLine[CELL_ONE] != "contest":
+        if listOfLine[OPERATION] != "inside":
             continue
-        elif listOfLine[CELL_FOUR] != faculty:
+        elif listOfLine[FACULTY] != faculty:
             continue
-        elif listOfLine[CELL_TWO] in votersIdList:
+        elif listOfLine[ID] in votersIdList:
             continue
-        if isIn(studyProgramsList,listOfLine[CELL_THREE]):
-            insertStudyProgramVote(studyProgramsList, listOfLine[CELL_THREE])
-        else:
-            studyProgramsList.append([listOfLine[CELL_THREE], 1])
-        votersIdList.append(listOfLine[CELL_TWO])
-
+        insertStudyProgramVote(studyProgramsList, listOfLine[STUDY_PROGRAM], 1)
+        votersIdList.append(listOfLine[ID])
+    file.close()
     maxStudyProgramVotes = 0
     maxStudyProgramName = ""
     for listCell in studyProgramsList:
-        if listCell[1] > maxStudyProgramVotes:
-            maxStudyProgramVotes=listCell[CELL_ONE]
-            maxStudyProgramName=listCell[CELL_ZERO]
-
-    file.close()
+        if listCell[1]>maxStudyProgramVotes:
+            maxStudyProgramVotes = listCell[STUDY_PROGRAM_VOTES]
+            maxStudyProgramName = listCell[STUDY_PROGRAM_NAME]
     if maxStudyProgramVotes == 0:
         return "Error"
     return maxStudyProgramName
