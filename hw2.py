@@ -53,12 +53,6 @@ def inside_contest(faculty, file_name):
 
 
 
-
-
-
-
-
-
 def add_vote(t,faculties,student,studentFaculty,votingProgram):
     for faculty in faculties:
         if faculty[1] == votingProgram:
