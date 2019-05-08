@@ -33,7 +33,7 @@ for line in file:
     if lineList[0] == "techniovision":
         if not (lineList[1] in ids):
             ids.append(lineList[1])
-            add_vote(t,faculties,list[1],list[3],list[4])
+            add_vote(t, faculties, list[1], list[3], list[4])
 file.close()
 
 Techniovision.TechniovisionWinningFaculty(t)
