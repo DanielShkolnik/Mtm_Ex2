@@ -1,5 +1,5 @@
 import  Techniovision
-#include 'provided_files/Technovision.py'
+
 
 CELL_ZERO = 0
 CELL_ONE = 1
