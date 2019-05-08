@@ -29,23 +29,19 @@ def inside_contest(faculty, file_name):
     votersIdList = []
     studyProgramsList = []
     for line in file:
-        listOfLine=line.split(' ')
+        listOfLine=line.split()
         if listOfLine[OPERATION] == "staff" and listOfLine[STAFF_FACULTY] == faculty:
             insertStudyProgramVote(studyProgramsList, listOfLine[STAFF_STUDY_PROGRAM], 20)
             continue
-        if listOfLine[OPERATION] != "inside":
-            continue
-        elif listOfLine[FACULTY] != faculty:
-            continue
-        elif listOfLine[ID] in votersIdList:
-            continue
-        insertStudyProgramVote(studyProgramsList, listOfLine[STUDY_PROGRAM], 1)
-        votersIdList.append(listOfLine[ID])
+        if listOfLine[OPERATION] == "inside" and listOfLine[FACULTY] == faculty\
+                and not (listOfLine[ID] in votersIdList):
+            insertStudyProgramVote(studyProgramsList, listOfLine[STUDY_PROGRAM], 1)
+            votersIdList.append(listOfLine[ID])
     file.close()
     maxStudyProgramVotes = 0
     maxStudyProgramName = ""
     for listCell in studyProgramsList:
-        if listCell[1]>maxStudyProgramVotes:
+        if listCell[1] > maxStudyProgramVotes:
             maxStudyProgramVotes = listCell[STUDY_PROGRAM_VOTES]
             maxStudyProgramName = listCell[STUDY_PROGRAM_NAME]
     if maxStudyProgramVotes == 0:
@@ -60,9 +56,7 @@ def add_vote(t,faculties,student,studentFaculty,votingProgram):
             Techniovision.TechniovisionStudentVotes(t, int(student), str(studentFaculty), str(faculty[0]))
 
 
-
-
-techniovision = Techniovision.TechniovisionCreate()
+t = Techniovision.TechniovisionCreate()
 faculties = []
 file = open("input.txt")
 for line in file:
@@ -82,8 +76,8 @@ for line in file:
     if lineList[0] == "techniovision":
         if not (lineList[1] in ids):
             ids.append(lineList[1])
-            add_vote(techniovision, faculties, list[1], list[3], list[4])
+            add_vote(t, faculties, lineList[1], lineList[3], lineList[2])
 file.close()
 
-Techniovision.TechniovisionWinningFaculty(techniovision)
-Techniovision.TechniovisionDestroy(techniovision)
+Techniovision.TechniovisionWinningFaculty(t)
+Techniovision.TechniovisionDestroy(t)
