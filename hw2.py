@@ -70,6 +70,7 @@ for line in file:
         faculties.append([lineList[-1], ''])
 file.close()
 
+
 for faculty in faculties:
     faculty[1] = inside_contest(faculty[0], "input.txt")
 
