@@ -49,6 +49,10 @@ def inside_contest(faculty, file_name):
     return maxStudyProgramName
 
 
+TECHNIOVISION_STUDENT = 1
+TECHNIOVISION_VOTING_PROGRAM = 2
+TECHNIOVISION_STUDENT_FACULTY = 3
+
 
 def add_vote(t,faculties,student,studentFaculty,votingProgram):
     for faculty in faculties:
@@ -62,7 +66,7 @@ file = open("input.txt")
 for line in file:
     lineList = line.split()
     if lineList[0] == "staff":
-        faculties.append([lineList[-1], ''])
+        faculties.append([lineList[STAFF_FACULTY], ''])
 file.close()
 
 
@@ -75,8 +79,9 @@ for line in file:
     lineList = line.split()
     if lineList[0] == "techniovision":
         if not (lineList[1] in ids):
-            ids.append(lineList[1])
-            add_vote(t, faculties, lineList[1], lineList[3], lineList[2])
+            ids.append(lineList[TECHNIOVISION_STUDENT])
+            add_vote(t, faculties, lineList[TECHNIOVISION_STUDENT], lineList[TECHNIOVISION_STUDENT_FACULTY],
+                     lineList[TECHNIOVISION_VOTING_PROGRAM])
 file.close()
 
 Techniovision.TechniovisionWinningFaculty(t)
