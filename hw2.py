@@ -60,7 +60,7 @@ def add_vote(t,faculties,student,studentFaculty,votingProgram):
             Techniovision.TechniovisionStudentVotes(t, int(student), str(studentFaculty), str(faculty[0]))
 
 
-t = Techniovision.TechniovisionCreate()
+techniovision = Techniovision.TechniovisionCreate()
 faculties = []
 file = open("input.txt")
 for line in file:
@@ -80,9 +80,9 @@ for line in file:
     if lineList[0] == "techniovision":
         if not (lineList[1] in ids):
             ids.append(lineList[TECHNIOVISION_STUDENT])
-            add_vote(t, faculties, lineList[TECHNIOVISION_STUDENT], lineList[TECHNIOVISION_STUDENT_FACULTY],
+            add_vote(techniovision, faculties, lineList[TECHNIOVISION_STUDENT], lineList[TECHNIOVISION_STUDENT_FACULTY],
                      lineList[TECHNIOVISION_VOTING_PROGRAM])
 file.close()
 
-Techniovision.TechniovisionWinningFaculty(t)
-Techniovision.TechniovisionDestroy(t)
+Techniovision.TechniovisionWinningFaculty(techniovision)
+Techniovision.TechniovisionDestroy(techniovision)
