@@ -54,10 +54,10 @@ TECHNIOVISION_VOTING_PROGRAM = 2
 TECHNIOVISION_STUDENT_FACULTY = 3
 
 
-def add_vote(t,faculties,student,studentFaculty,votingProgram):
+def add_vote(techniovisions, faculties, student, studentFaculty, votingProgram):
     for faculty in faculties:
         if faculty[1] == votingProgram:
-            Techniovision.TechniovisionStudentVotes(t, int(student), str(studentFaculty), str(faculty[0]))
+            Techniovision.TechniovisionStudentVotes(techniovisions, int(student), str(studentFaculty), str(faculty[0]))
 
 
 techniovision = Techniovision.TechniovisionCreate()
