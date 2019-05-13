@@ -79,10 +79,8 @@ file = open("input.txt")
 for line in file:
     lineList = line.split()
     if lineList[OPERATION] == "techniovision":
-        if not (lineList[TECHNIOVISION_STUDENT] in ids):
-            ids.append(lineList[TECHNIOVISION_STUDENT])
-            add_vote(techniovision, faculties, lineList[TECHNIOVISION_STUDENT], lineList[TECHNIOVISION_STUDENT_FACULTY],
-                     lineList[TECHNIOVISION_VOTING_PROGRAM])
+        add_vote(techniovision, faculties, lineList[TECHNIOVISION_STUDENT], lineList[TECHNIOVISION_STUDENT_FACULTY],
+                 lineList[TECHNIOVISION_VOTING_PROGRAM])
 file.close()
 
 Techniovision.TechniovisionWinningFaculty(techniovision)
