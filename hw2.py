@@ -74,7 +74,6 @@ file.close()
 for faculty in faculties:
     faculty[FACULTY_PROGRAM] = inside_contest(faculty[FACULTY_NAME], "input.txt")
 
-ids = []
 file = open("input.txt")
 for line in file:
     lineList = line.split()
